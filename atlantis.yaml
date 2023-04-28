@@ -1,15 +1,19 @@
 # version: 3
 version: 3
 
+projects:
+- name: luminor-test
+  dir: luminor_tf_task
+  workflow: test
+
 workflows:
   test:
     plan:
       steps:
-      - init:
-          extra_args: ["-var-file=luminor_eks.tfvars"]
+      - init
       - plan:
-          extra_args: ["-var-file=luminor_eks.tfvars"]
+          extra_args: ["-var-file","luminor_eks.tfvars"]
     apply:
       steps:
       - apply:
-          extra_args: ["-var-file=luminor_eks.tfvars"]
+          extra_args: ["-var-file","luminor_eks.tfvars"]

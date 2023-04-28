@@ -11,9 +11,8 @@ workflows:
     plan:
       steps:
       - init
-      - plan:
-          extra_args: ["-var-file","luminor_eks.tfvars"]
+      - run: ["terraform","plan","-var-file","luminor_eks.tfvars"]
     apply:
       steps:
-      - apply:
-          extra_args: ["-var-file","luminor_eks.tfvars"]
+      - run: ["terraform","apply","-var-file","luminor_eks.tfvars"]
+          

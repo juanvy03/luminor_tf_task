@@ -17,4 +17,3 @@ workflows:
       steps:
       - apply:
           extra_args: ["-var-file","luminor_eks.tfvars"]
-          

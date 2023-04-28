@@ -1,6 +1,8 @@
 # version: 3
+version: 3
+
 workflows:
-  myworkflow:
+  test:
     plan:
       steps:
       - init:

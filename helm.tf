@@ -62,7 +62,7 @@ resource "helm_release" "atlantis" {
     value = <<E
     repos:
     - id: /.*/
-      allowed_overrides: []
+      allowed_overrides: [workflow]
       allow_custom_workflows: true
     E
   }

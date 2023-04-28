@@ -1,0 +1,13 @@
+# atlantis.yaml or repos.yaml
+workflows:
+  myworkflow:
+    plan:
+      steps:
+      - init:
+          extra_args: ["-var-file=luminor_eks.tfvars"]
+      - plan:
+          extra_args: ["-var-file=luminor_eks.tfvars"]
+    apply:
+      steps:
+      - apply:
+          extra_args: ["-var-file=luminor_eks.tfvars"]

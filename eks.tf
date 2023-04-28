@@ -9,26 +9,25 @@ module "eks" {
 
   cluster_endpoint_public_access = var.eks_cluster_config["public"]
 
-  tags = merge(local.extra_tags, { "kubernetes.io/cluster/tx24-fg-dev" : "shared" })
+  tags = merge(local.extra_tags, { "kubernetes.io/cluster/eks-luminor-test" : "shared" })
   # Configure worker nodes
   eks_managed_node_groups = {
     luminor_init = {
       create_launch_template = var.eks_luminor_init_ng["create"]
+      name                 = var.eks_luminor_init_ng["name"]
+
+      instance_types        = [ var.eks_luminor_init_ng["instance_type"] ]
+      capacity_type          = var.eks_luminor_init_ng["capacity"]
+
       min_size               = var.eks_luminor_init_ng["min_size"]
       max_size               = var.eks_luminor_init_ng["max_size"]
-      asg_desired_capacity   = var.eks_luminor_init_ng["desired_size"]
-
-      disk_size       = var.eks_luminor_init_ng["disk_size"]
-      disk_type       = var.eks_luminor_init_ng["disk_type"]
-      disk_throughput = var.eks_luminor_init_ng["disk_throughput"]
-      disk_iops       = var.eks_luminor_init_ng["disk_iops"]
-
-      name                 = var.eks_luminor_init_ng["name"]
-      instance_types        = [ var.eks_luminor_init_ng["instance_type"] ]
+      desired_size           = var.eks_luminor_init_ng["desired_size"]
 
       ec2_ssh_key = var.eks_luminor_init_ng["ec2_ssh_key"]
 
       security_groups = [ module.eks.cluster_security_group_id ]
+
+      enable_monitoring      = var.eks_luminor_init_ng["monitoring"]
 
       tags = {
         Terraform   = "true"

@@ -6,8 +6,8 @@ region="eu-central-1"
 vpc_name="luminor_test_vpc"
 azs_region=["eu-central-1a", "eu-central-1b", "eu-central-1c"]
 vpc_cidr="10.0.0.0/16"
-private_subnets=["10.0.1.0/24"]
-public_subnets=["10.0.101.0/24"]
+private_subnets=["10.0.1.0/24", "10.0.2.0/24"]
+public_subnets=["10.0.101.0/24", "10.0.201.0/24"]
 
 /* EKS main configuration */
 eks_cluster_config = {
@@ -29,6 +29,8 @@ eks_luminor_init_ng = {
     disk_iops=3000
     instance_type="t3.large"
     ec2_ssh_key="fetch3-eu"
+    capacity="SPOT"
+    monitoring=false
 }
 
 ec2_instance_profile="arn:aws:iam::127267203009:instance-profile/instance_adm"

@@ -3,7 +3,7 @@ version: 3
 
 projects:
 - name: luminor-test
-  dir: luminor_tf_task
+  dir: .
   workflow: luminor
 
 workflows:

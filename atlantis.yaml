@@ -1,4 +1,4 @@
-# atlantis.yaml or repos.yaml
+# version: 3
 workflows:
   myworkflow:
     plan:

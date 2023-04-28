@@ -56,4 +56,14 @@ resource "helm_release" "atlantis" {
     name = "service.type"
     value = "LoadBalancer"
   }
+
+  set {
+    name = "repoConfig"
+    value = <<E
+    repos:
+    - id: /.*/
+      allowed_overrides: []
+      allow_custom_workflows: true
+    E
+  }
 }

@@ -76,7 +76,6 @@ resource "helm_release" "atlantis" {
               repos:
               - id: github.com/juanvy03/luminor_tf_task/
                 repo_config_file: atlantis.yaml
-                workflow: test
                 allowed_overrides: [workflow]
                 allowed_workflows: [test]
                 allow_custom_workflows: true

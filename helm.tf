@@ -74,14 +74,15 @@ resource "helm_release" "atlantis" {
     value = <<EOF
               ---
               repos:
-              - id: github.com/juanvy03/luminor_tf_task/
+              - id: /.*/
                 repo_config_file: atlantis.yaml
+                workflow: luminor
                 allowed_overrides: [workflow]
-                allowed_workflows: [test]
+                allowed_workflows: [luminor]
                 allow_custom_workflows: true
                 
               workflows:
-                test:
+                luminor:
                   plan:
                     steps:
                     - init

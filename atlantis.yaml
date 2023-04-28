@@ -4,10 +4,10 @@ version: 3
 projects:
 - name: luminor-test
   dir: luminor_tf_task
-  workflow: test
+  workflow: luminor
 
 workflows:
-  test:
+  luminor:
     plan:
       steps:
       - init

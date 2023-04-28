@@ -1,3 +1,15 @@
+provider "helm" {
+  kubernetes {
+    host                   = module.eks.cluster_endpoint
+    cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
+    exec {
+      api_version = "client.authentication.k8s.io/v1beta1"
+      args        = ["eks", "get-token", "--cluster-name", module.eks.cluster_name]
+      command     = "aws"
+    }
+  }
+}
+
 resource "helm_release" "nginx-ingress-controller" {
   name       = "nginx-ingress-controller"
   repository = "https://charts.bitnami.com/bitnami"
@@ -59,11 +71,24 @@ resource "helm_release" "atlantis" {
 
   set {
     name = "repoConfig"
-    value = <<E
-    repos:
-    - id: /.*/
-      allowed_overrides: [workflow]
-      allow_custom_workflows: true
-    E
+    value = <<EOF
+              ---
+              repos:
+              - id: /.*/
+                workflow: test
+                allowed_overrides: []
+                allow_custom_workflows: false
+              workflows:
+                test:
+                  plan:
+                    steps:
+                    - init
+                    - plan:
+                        extra_args: [\"\-var-file\"\,\"\luminor_eks.tfvars\"\]
+                  apply:
+                    steps:
+                    - apply:
+                        extra_args: [\"\-var-file\"\,\"\luminor_eks.tfvars\"\]
+            EOF
   }
 }

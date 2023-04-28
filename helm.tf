@@ -53,8 +53,8 @@ resource "helm_release" "atlantis" {
     name = "aws.credentials"
     value = <<E
         [default]
-        aws_access_key_id=AKIAR3INXM7A3SSWWLE5
-        aws_secret_access_key=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
+        aws_access_key_id=AKIAR3INXM7ASN3PWNAU
+        aws_secret_access_key=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
         region=eu-central-1"
         E
   }

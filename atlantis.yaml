@@ -1,0 +1,20 @@
+# version: 3
+version: 3
+
+projects:
+- name: luminor-test
+  dir: .
+  workflow: luminor
+
+workflows:
+  luminor:
+    plan:
+      steps:
+      - run: apk add --no-cache aws-cli
+      - init
+      - plan:
+          extra_args: ["-var-file","luminor_eks.tfvars"]
+    apply:
+      steps:
+      - apply:
+          extra_args: ["-var-file","luminor_eks.tfvars"]

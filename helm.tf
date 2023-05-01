@@ -84,7 +84,7 @@ E
                 luminor:
                   plan:
                     steps:
-                    - run: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && unzip awscliv2.zip && ./aws/install -i /usr/local/aws-cli -b /usr/local/bin
+                    - run: apk add --no-cache aws-cli
                     - init
                     - plan:
                         extra_args: [\"\-var-file\"\,\"\luminor_eks.tfvars\"\]

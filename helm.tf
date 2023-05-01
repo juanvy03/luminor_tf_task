@@ -27,7 +27,6 @@ resource "helm_release" "atlantis" {
   repository = "https://runatlantis.github.io/helm-charts"
   chart      = "atlantis"
 
-
   set {
     name = "orgAllowlist"
     value =  "github.com/juanvy03/*"
@@ -40,7 +39,6 @@ resource "helm_release" "atlantis" {
 
   set {
     name = "github.token"
-    #value = "atlantis_cicd"
     value = "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"
   }
 

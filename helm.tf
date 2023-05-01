@@ -52,11 +52,11 @@ resource "helm_release" "atlantis" {
   set {
     name = "aws.credentials"
     value = <<E
-        [default]
-        aws_access_key_id=AKIAR3INXM7ASN3PWNAU
-        aws_secret_access_key=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
-        region=eu-central-1"
-        E
+[default]
+aws_access_key_id=AKIAR3INXM7ASN3PWNAU
+aws_secret_access_key=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
+region=eu-central-1"
+E
   }
 
   set {
@@ -84,6 +84,7 @@ resource "helm_release" "atlantis" {
                 luminor:
                   plan:
                     steps:
+                    - run: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && unzip awscliv2.zip && sudo ./aws/install
                     - init
                     - plan:
                         extra_args: [\"\-var-file\"\,\"\luminor_eks.tfvars\"\]
